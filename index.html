@@ -23,7 +23,6 @@
       font-family: 'Khmer OS Muol Light', 'Khmer OS Muol', 'Moul', serif;
       font-weight: normal;
       line-height: 1.6;
-      font-size: 13px !important;
     }
     
     /* ហ្វុនអក្សរធម្មតា និងខ្លឹមសារទូទៅ (Khmer OS Battambang) */
@@ -140,8 +139,8 @@
         <div class="w-20 h-20 mx-auto p-1.5 bg-white rounded-2xl shadow-lg border border-slate-100 flex items-center justify-center transform hover:scale-105 transition-all">
           <img src="https://lh3.googleusercontent.com/d/1L6k3hiIN-0sWPSNGDN3YJTsTYgzYS8Dn" alt="សាលាបឋមសិក្សា ម៉ឹង សំផន" class="w-16 h-16 object-contain rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/150x150/0f766e/ffffff?text=%E1%9E%98%E1%9F%8Grid';">
         </div>
-        <h2 class="text-base font-muol text-teal-900 leading-relaxed">ប្រព័ន្ធវាយតម្លៃពិន្ទុសិស្សបែបឌីជីថល</h2>
-        <p class="text-xs text-slate-500 font-bold">សាលាបឋមសិក្សា ម៉ឹង សំផន</p>
+        <h2 class="text-xl md:text-2xl font-muol text-teal-900 leading-relaxed">ប្រព័ន្ធពិន្ទុឌីជីថល</h2>
+        <p class="text-sm md:text-base text-slate-600 font-bold">សាលាបឋមសិក្សា ម៉ឹង សំផន</p>
       </div>
       
       <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4 text-xs font-content">
@@ -917,9 +916,9 @@
       { id: "sa18", text: "កម្មវិធីទស្សនកិច្ចសិក្សា និងការស្វែងយល់ប្រវត្តិសាស្ត្រមូលដ្ឋាន" }
     ];
 
-    // ទិន្នន័យសិស្សដំបូងគំរូពិតប្រាកដ
+    // ទិន្នន័យសិស្សដំបូងគំរូពិតប្រាកដ (ដក academicScore ចេញ)
     const INITIAL_STUDENTS = [
-      { id: "st_6a_01", studentId: "1", nameKh: "កាម វណ្ណឌី", nameEn: "", gender: "ប្រុស", className: "ថ្នាក់ទី ៦ ក", academicScore: 8.5, aiComment: "", behavior: { cleanliness: ["c1", "c2", "c3"], politeness: ["p1", "p2"], orderliness: ["o1", "o2"], punctuality: ["t1", "t2"], mindfulness: ["m1", "m2"] }, skills: {} },
+      { id: "st_6a_01", studentId: "1", nameKh: "កាម វណ្ណឌី", nameEn: "", gender: "ប្រុស", className: "ថ្នាក់ទី ៦ ក", aiComment: "", behavior: { cleanliness: ["c1", "c2", "c3"], politeness: ["p1", "p2"], orderliness: ["o1", "o2"], punctuality: ["t1", "t2"], mindfulness: ["m1", "m2"] }, skills: {} },
     ];
 
     // ២. អថេរ និងរចនាសម្ព័ន្ធទិន្នន័យ (State Management)
@@ -1389,7 +1388,6 @@
         nameEn: "",
         gender,
         className: classConfig.className,
-        academicScore: null,
         aiComment: "",
         behavior: { cleanliness: [], politeness: [], orderliness: [], punctuality: [], mindfulness: [] },
         skills: SKILL_ACTIVITIES.reduce((acc, act) => ({ ...acc, [act.id]: 0 }), {})
@@ -1578,7 +1576,6 @@
       }).join('');
 
       const nameEnRow = currentStudent.nameEn ? `<p class="mb-1.5"><strong class="inline-block w-24 font-content font-bold">ឈ្មោះ (ឡាតាំង)៖</strong> <span class="font-mono">${currentStudent.nameEn}</span></p>` : '';
-      const academicScoreRow = (currentStudent.academicScore !== undefined && currentStudent.academicScore !== null) ? `<p class="mb-1.5"><strong class="inline-block w-20 font-content font-bold">វិជ្ជាសម្បទា៖</strong> ${currentStudent.academicScore}/10 ពិន្ទុ</p>` : '';
 
       const aiCommentContent = currentStudent.aiComment 
         ? `<div class="whitespace-pre-wrap text-slate-800 text-xs leading-relaxed font-content">${currentStudent.aiComment}</div>`
@@ -1606,7 +1603,7 @@
 
         <div class="text-center my-4 print:my-2 space-y-1">
           <h2 class="text-base md:text-lg font-muol text-slate-900 print:text-xs">សន្លឹកវាយតម្លៃការសិក្សា និងការអភិវឌ្ឍគុណវុឌ្ឍិសិស្ស</h2>
-          <p class="text-xs text-slate-500 italic print:text-[9px]">ផ្នែកវិជ្ជាសម្បទា ចរិយាសម្បទា និងបំណិនសម្បទា</p>
+          <p class="text-xs text-slate-500 italic print:text-[9px]">ផ្នែកចរិយាសម្បទា និងបំណិនសម្បទា</p>
         </div>
 
         <div class="grid grid-cols-2 gap-4 border border-slate-950 p-4 print:p-2.5 rounded text-xs print:text-[10px] font-content font-bold">
@@ -1617,7 +1614,6 @@
           </div>
           <div>
             <p class="mb-1.5 print:mb-0.5"><strong class="inline-block w-20 font-content font-bold">ភេទ៖</strong> ${currentStudent.gender}</p>
-            ${academicScoreRow}
           </div>
         </div>
 
@@ -1718,9 +1714,7 @@
       const titleName = `សន្លឹកវាយតម្លៃ_សិស្សទាំងអស់ក្នុងប្រព័ន្ធ.html`;
       generateBulkHTML(students, titleName);
     }
-
-
-    // អនុគមន៍ជំនួយរួមសម្រាប់បង្កើត HTML ចងក្រងជាក្រុម
+    // អនុគមន៍ជំនួយរួមសម្រាប់បង្កើត HTML ចងក្រងជាក្រុម (ដកពិន្ទុវិជ្ជាសម្បទាចេញ)
     function generateBulkHTML(listToPrint, filename) {
       if (listToPrint.length === 0) {
         showToast("មិនមានសិស្សក្នុងបញ្ជីសម្រាប់ទាញយកទេ!", "error");
@@ -1767,7 +1761,7 @@
               </div>
               <div style="text-align: center; margin: 12px 0 8px 0;">
                 <h2 class="font-muol" style="margin: 0; font-size: 12.5px;">សន្លឹកវាយតម្លៃការសិក្សា និងការអភិវឌ្ឍគុណវុឌ្ឍិសិស្ស</h2>
-                <p style="margin: 2px 0 0 0; font-size: 9.5px; font-style: italic;">ផ្នែកវិជ្ជាសម្បទា ចរិយាសម្បទា និងបំណិនសម្បទា</p>
+                <p style="margin: 2px 0 0 0; font-size: 9.5px; font-style: italic;">ផ្នែកចរិយាសម្បទា និងបំណិនសម្បទា</p>
               </div>
               <div class="info-grid">
                 <div>
@@ -1872,7 +1866,6 @@
       const sScore = calculateSkillScore(currentStudent);
       details.innerHTML = `
         <p>• សិស្ស៖ <span class="text-slate-900 font-content">${currentStudent.nameKh}</span> (${currentStudent.gender})</p>
-        ${currentStudent.academicScore !== undefined && currentStudent.academicScore !== null ? `<p>• វិជ្ជាសម្បទា៖ <span class="text-slate-900">${currentStudent.academicScore}/10 ពិន្ទុ</span></p>` : ''}
         <p>• ចរិយាសម្បទា (៥)៖ <span class="text-slate-900">${bScore}/60 ពិន្ទុ</span></p>
         <p>• បំណិនសម្បទា៖ <span class="text-slate-900">${sScore}/72 ពិន្ទុ</span></p>
       `;
@@ -2048,7 +2041,6 @@
             "ឈ្មោះខ្មែរ": "សុខ ជា",
             "ឈ្មោះឡាតាំង": "Sok Chea",
             "ភេទ": "ប្រុស",
-            "វិជ្ជាសម្បទា": 8.5,
             "ចរិយាសម្បទា_ស្អាត": 9,
             "ចរិយាសម្បទា_សុភាព": 10,
             "ចរិយាសម្បទា_របៀប": 15,
@@ -2063,7 +2055,6 @@
             "ឈ្មោះខ្មែរ": "ចាន់ ធីតា",
             "ឈ្មោះឡាតាំង": "",
             "ភេទ": "ស្រី",
-            "វិជ្ជាសម្បទា": "",
             "ចរិយាសម្បទា_ស្អាត": 0,
             "ចរិយាសម្បទា_សុភាព": 0,
             "ចរិយាសម្បទា_របៀប": 0,
@@ -2126,7 +2117,6 @@
           "ឈ្មោះឡាតាំង": s.nameEn || "",
           "ភេទ": s.gender,
           "ថ្នាក់": s.className || classConfig.className,
-          "វិជ្ជាសម្បទា": s.academicScore !== undefined && s.academicScore !== null ? s.academicScore : "",
           "ចរិយាសម្បទា_ស្អាត": s.behavior.cleanliness.length,
           "ចរិយាសម្បទា_សុភាព": s.behavior.politeness.length,
           "ចរិយាសម្បទា_របៀប": s.behavior.orderliness.length,
@@ -2228,7 +2218,6 @@
             const roomVal = row["បន្ទប់"] || row["Class"] || "";
             const studentClass = (gradeVal && roomVal) ? `ថ្នាក់ទី ${gradeVal} ${roomVal}` : classConfig.className;
 
-            const academicScore = row["វិជ្ជាសម្បទា"] !== undefined && row["វិជ្ជាសម្បទា"] !== "" ? parseFloat(row["វិជ្ជាសម្បទា"]) : null;
             const aiComment = row["មតិវាយតម្លៃ_AI"] || "";
 
             const behaviorObj = { cleanliness: [], politeness: [], orderliness: [], punctuality: [], mindfulness: [] };
@@ -2279,7 +2268,6 @@
               nameEn,
               gender,
               className: studentClass,
-              academicScore,
               aiComment,
               behavior: behaviorObj,
               skills: skillsObj
@@ -2459,7 +2447,6 @@
         }).join('');
 
         const nameEnRow = s.nameEn ? `<p class="mb-1"><strong class="inline-block w-24 font-content font-bold">ឈ្មោះ (ឡាតាំង)៖</strong> <span class="font-mono">${s.nameEn}</span></p>` : '';
-        const academicScoreRow = (s.academicScore !== undefined && s.academicScore !== null) ? `<p class="mb-1"><strong class="inline-block w-20 font-content font-bold">វិជ្ជាសម្បទា៖</strong> ${s.academicScore}/10 ពិន្ទុ</p>` : '';
 
         const aiCommentContent = s.aiComment 
           ? `<div class="whitespace-pre-wrap text-slate-800 text-xs leading-relaxed font-content">${s.aiComment}</div>`
@@ -2491,7 +2478,7 @@
 
               <div class="text-center my-2 space-y-0.5">
                 <h2 class="text-sm md:text-base font-muol text-slate-900">សន្លឹកវាយតម្លៃការសិក្សា និងការអភិវឌ្ឍគុណវុឌ្ឍិសិស្ស</h2>
-                <p class="text-xs text-slate-500 italic">ផ្នែកវិជ្ជាសម្បទា ចរិយាសម្បទា និងបំណិនសម្បទា</p>
+                <p class="text-xs text-slate-500 italic">ផ្នែកចរិយាសម្បទា និងបំណិនសម្បទា</p>
               </div>
 
               <div class="grid grid-cols-2 gap-4 border border-slate-950 p-2.5 rounded text-xs font-content font-bold">
@@ -2502,7 +2489,6 @@
                 </div>
                 <div>
                   <p class="mb-0.5"><strong class="inline-block w-20 font-content font-bold">ភេទ៖</strong> ${s.gender}</p>
-                  ${academicScoreRow}
                 </div>
               </div>
 
