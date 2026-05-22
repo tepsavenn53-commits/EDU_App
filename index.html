@@ -135,11 +135,12 @@
   <!-- Section សម្រាប់ប្រព័ន្ធ Login (បង្ហាញមុនគេបង្អស់) -->
   <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-teal-950 via-teal-900 to-emerald-950 font-content">
     <div class="bg-white/95 backdrop-blur-md p-8 rounded-2xl shadow-2xl max-w-md w-full border border-teal-800/20 text-slate-800 space-y-6 mx-4">
-      <div class="text-center space-y-3">
+      <div class="text-center space-y-4">
         <div class="w-20 h-20 mx-auto p-1.5 bg-white rounded-2xl shadow-lg border border-slate-100 flex items-center justify-center transform hover:scale-105 transition-all">
           <img src="https://lh3.googleusercontent.com/d/1L6k3hiIN-0sWPSNGDN3YJTsTYgzYS8Dn" alt="សាលាបឋមសិក្សា ម៉ឹង សំផន" class="w-16 h-16 object-contain rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/150x150/0f766e/ffffff?text=%E1%9E%98%E1%9F%8Grid';">
         </div>
-        <h2 class="text-xl md:text-2xl font-muol text-teal-900 leading-relaxed">ប្រព័ន្ធពិន្ទុឌីជីថល</h2>
+        <!-- ធ្វើការពង្រីកទំហំ Font ចំណងជើង និងឈ្មោះសាលាឱ្យធំច្បាស់ស្អាត -->
+        <h2 class="text-xl md:text-2xl font-muol text-teal-900 leading-relaxed tracking-wide">ប្រព័ន្ធវាយតម្លៃពិន្ទុសិស្សបែបឌីជីថល</h2>
         <p class="text-sm md:text-base text-slate-600 font-bold">សាលាបឋមសិក្សា ម៉ឹង សំផន</p>
       </div>
       
@@ -757,7 +758,7 @@
             </div>
             <div class="bg-slate-50 p-3 rounded-lg">
               <span class="font-bold text-teal-700 block mb-1 font-bold animate-none">T - To-do</span>
-              <p class="text-slate-600 font-content font-bold">បញ្ជាក់ការងារដែលត្រូវធ្វើ ដូចជាការវិភាគពិន្ទុសិស្ស និងផ្តល់ដំបូន្មានជាក់ស្តែង។</p>
+              <p class="text-slate-600 font-content font-bold">បញ្ជាក់ការងារដែលត្រូវធ្វើ ដូចជាការវិភាគពិន្ទុសិស្ស និងផ្តល់ដំបូំនៀនជាក់ស្តែង។</p>
             </div>
             <div class="bg-slate-50 p-3 rounded-lg">
               <span class="font-bold text-teal-700 block mb-1 font-bold">S - Style</span>
@@ -916,7 +917,7 @@
       { id: "sa18", text: "កម្មវិធីទស្សនកិច្ចសិក្សា និងការស្វែងយល់ប្រវត្តិសាស្ត្រមូលដ្ឋាន" }
     ];
 
-    // ទិន្នន័យសិស្សដំបូងគំរូពិតប្រាកដ (ដក academicScore ចេញ)
+    // ទិន្នន័យសិស្សដំបូងគំរូពិតប្រាកដ (ដក academicScore ចេញទាំងស្រុង)
     const INITIAL_STUDENTS = [
       { id: "st_6a_01", studentId: "1", nameKh: "កាម វណ្ណឌី", nameEn: "", gender: "ប្រុស", className: "ថ្នាក់ទី ៦ ក", aiComment: "", behavior: { cleanliness: ["c1", "c2", "c3"], politeness: ["p1", "p2"], orderliness: ["o1", "o2"], punctuality: ["t1", "t2"], mindfulness: ["m1", "m2"] }, skills: {} },
     ];
@@ -1001,12 +1002,10 @@
       return students.filter(s => (s.className || classConfig.className) === selectedClassFilter);
     }
 
-    
     // ៤. ការចាប់ផ្តើមដំបូង (Initializations)
     window.onload = function() {
-      // ពិនិត្យប្រព័ន្ធសុវត្ថិភាពដំបូងបង្អស់
       const authed = checkAuth();
-      lucide.createIcons(); // គូររូបតំណាងនៅលើផ្ទាំង Login ឬផ្ទាំងមេ
+      lucide.createIcons(); 
 
       if (window.XLSX) {
         isXlsxLoaded = true;
@@ -1176,7 +1175,6 @@
       if (!student || !student.skills) return 0;
       return Object.values(student.skills).reduce((sum, val) => sum + (val || 0), 0);
     }
-
 
     // ប្តូរ Tab មើលទំព័រ
     function switchTab(tabId) {
@@ -1581,12 +1579,9 @@
         ? `<div class="whitespace-pre-wrap text-slate-800 text-xs leading-relaxed font-content">${currentStudent.aiComment}</div>`
         : `<p class="text-slate-600 italic leading-relaxed font-content">ផ្អែកលើលទ្ធផល៖ សិស្ស ${currentStudent.nameKh} ទទួលបានពិន្ទុចរិយាសម្បទា "${bScore}/60" (${getBehaviorLevel(bScore).text}) និងបំណិនសម្បទា "${sScore}/72" (${getSkillLevel(sScore).text})។ សិស្សមានឥរិយាបថល្អ និងចូលរួមយ៉ាងសកម្មក្នុងការអភិវឌ្ឍខ្លួន។ (លោកគ្រូអ្នកគ្រូអាចចុចប៊ុងតុងខាងលើដើម្បីឱ្យ AI បង្កើតមតិលម្អិត)</p>`;
 
+      // Removed School Logo image from preview card
       container.innerHTML = `
         <div class="flex flex-col items-center text-center space-y-1 print:space-y-0.5 relative">
-          <!-- Authentic School Logo on Preview Sheet -->
-          <div class="w-16 h-16 mb-2 print:w-14 print:h-14 flex items-center justify-center">
-            <img src="https://lh3.googleusercontent.com/d/1L6k3hiIN-0sWPSNGDN3YJTsTYgzYS8Dn" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/150x150/0f766e/ffffff?text=MS';">
-          </div>
           <h3 class="text-base md:text-lg text-slate-900 font-muol print:text-sm">ព្រះរាជាណាចក្រកម្ពុជា</h3>
           <h4 class="text-sm md:text-base text-slate-900 font-muol print:text-xs">ជាតិ សាសនា ព្រះមហាក្សត្រ</h4>
           <div class="flex justify-center py-1 print:py-0.5 w-full">
@@ -1714,7 +1709,8 @@
       const titleName = `សន្លឹកវាយតម្លៃ_សិស្សទាំងអស់ក្នុងប្រព័ន្ធ.html`;
       generateBulkHTML(students, titleName);
     }
-    // អនុគមន៍ជំនួយរួមសម្រាប់បង្កើត HTML ចងក្រងជាក្រុម (ដកពិន្ទុវិជ្ជាសម្បទាចេញ)
+
+    // អនុគមន៍ជំនួយរួមសម្រាប់បង្កើត HTML ចងក្រងជាក្រុម (ដកពិន្ទុវិជ្ជាសម្បទាចេញ និងលុប Logo ចេញ)
     function generateBulkHTML(listToPrint, filename) {
       if (listToPrint.length === 0) {
         showToast("មិនមានសិស្សក្នុងបញ្ជីសម្រាប់ទាញយកទេ!", "error");
@@ -1743,13 +1739,11 @@
         const isNotLast = idx < listToPrint.length - 1;
         const pageBreakStyle = isNotLast ? 'page-break-after: always; break-after: page;' : '';
 
+        // Removed School Logo image from the A4 generated bulk HTML sheet
         allPages += `
           <div class="print-card" style="background: white; padding: 20px 30px; box-sizing: border-box; height: 277mm; display: flex; flex-direction: column; justify-content: space-between; ${pageBreakStyle}">
             <div>
               <div style="text-align: center;">
-                <div style="width: 56px; height: 56px; margin: 0 auto 6px auto;">
-                  <img src="https://lh3.googleusercontent.com/d/1L6k3hiIN-0sWPSNGDN3YJTsTYgzYS8Dn" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
-                </div>
                 <h3 class="font-muol" style="margin: 0; font-size: 12.5px;">ព្រះរាជាណាចក្រកម្ពុជា</h3>
                 <h4 class="font-muol" style="margin: 2px 0 0 0; font-size: 11px;">ជាតិ សាសនា ព្រះមហាក្សត្រ</h4>
                 <div style="width: 96px; height: 1.5px; background: #000; margin: 6px auto;"></div>
@@ -1830,14 +1824,14 @@
     <strong>សន្លឹកកិច្ចការសិស្សទាំងអស់ (${listToPrint.length} នាក់) រៀបចំរួមគ្នាជារឹម 1cm រួចរាល់!</strong>
     <button onclick="window.print()" style="background: #10b981; border: none; color: white; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer;">បោះពុម្ពគ្រប់ទំព័រ</button>
   </div>
-  ${allPages}
-  ${scriptOpen}
+  \${allPages}
+  \${scriptOpen}
     window.onload = function() {
       setTimeout(function() {
         window.print();
       }, 500);
     };
-  ${scriptClose}
+  \${scriptClose}
 </body>
 </html>`;
       triggerFileDownload(fullBulkDoc, `សន្លឹកវាយតម្លៃ_សិស្សទាំងអស់_ថ្នាក់_${classConfig.className}.html`);
@@ -1923,9 +1917,9 @@
       return `[តួនាទី (Role)]៖ ខ្ញុំជាគ្រូបង្រៀនថ្នាក់បឋមសិក្សា។
 [គោលបំណង (Purpose)]៖ ខ្ញុំចង់សរសេរការវាយតម្លៃចុងឆ្នាំ ផ្ដល់មតិយោបល់ស្ថាបនា និងដំបូន្មានអប់រំសម្រាប់សិស្សម្នាក់។
 [អ្នកអាន (Audience)]៖ អាណាព្យាបាលសិស្ស និងសាមីខ្លួនសិស្សផ្ទាល់។
-[កិច្ចការ (To-do)]៖ បង្កើតការវាយតម្លៃលម្អិតសម្រាប់សិស្សឈ្មោះ «${student.nameKh}» ភេទ «${student.gender}» ដែលមានលទ្ធផលដូចខាងក្រោម៖
-- ចរិយាសម្បទា (ការអនុវត្ត ៥ សកម្មភាព)៖ ទទួលបានពិន្ទុ ${bScore}/60 (កម្រិតវាយតម្លៃ៖ ${bLvl})
-- បំណិនសម្បទា (ការអនុវត្តកម្មវិធីក្រៅម៉ោងសិក្សា)៖ ទទួលបានពិន្ទុ ${sScore}/72 (កម្រិតវាយតម្លៃ៖ ${sLvl})
+[កិច្ចការ (To-do)]៖ បង្កើតការវាយតម្លៃលម្អិតសម្រាប់សិស្សឈ្មោះ «\${student.nameKh}» ភេទ «\${student.gender}» ដែលមានលទ្ធផលដូចខាងក្រោម៖
+- ចរិយាសម្បទា (ការអនុវត្ត ៥ សកម្មភាព)៖ ទទួលបានពិន្ទុ \${bScore}/60 (កម្រិតវាយតម្លៃ៖ \${bLvl})
+- បំណិនសម្បទា (ការអនុវត្តកម្មវិធីក្រៅម៉ោងសិក្សា)៖ ទទួលបានពិន្ទុ \${sScore}/72 (កម្រិតវាយតម្លៃ៖ \${sLvl})
 [ស្ទីល (Style)]៖ សូមសរសេរជាភាសាខ្មែរផ្លូវការ បែបអប់រំ និងលើកទឹកចិត្ត ដោយគូសបញ្ជាក់ពីចំណុចខ្លាំងរបស់សិស្ស និងចំណុចគួរកែលម្អបន្ថែម។`;
     }
 
@@ -1966,10 +1960,10 @@
       const lackingStr = lackingList.slice(0, 4).join(', ') || "គ្មានចំណុចខ្វះចន្លោះធំដុំទេ";
 
       const promptText = `សូមបង្កើតសេចក្តីសន្និដ្ឋានរួមវាយតម្លៃ និងការណែនាំអប់រំសម្រាប់សិស្សម្នាក់៖
-- ឈ្មោះសិស្ស៖ ${currentStudent.nameKh} (ភេទ៖ ${currentStudent.gender})
-- ពិន្ទុចរិយាសម្បទា (៥ សកម្មភាព)៖ ${bScore}/60 (កម្រិតវាយតម្លៃ៖ ${bLvl})
-- ចំណុចខ្វះចន្លោះផ្នែកចរិយាសម្បទាដែលគួរជួយបន្ថែម៖ ${lackingStr}
-- ពិន្ទុបំណិនសម្បទា (១៨ សកម្មភាព)៖ ${sScore}/72 (កម្រិតវាយតម្លៃ៖ ${sLvl})`;
+- ឈ្មោះសិស្ស៖ \${currentStudent.nameKh} (ភេទ៖ \${currentStudent.gender})
+- ពិន្ទុចរិយាសម្បទា (៥ សកម្មភាព)៖ \${bScore}/60 (កម្រិតវាយតម្លៃ៖ \${bLvl})
+- ចំណុចខ្វះចន្លោះផ្នែកចរិយាសម្បទាដែលគួរជួយបន្ថែម៖ \${lackingStr}
+- ពិន្ទុបំណិនសម្បទា (១៨ សកម្មភាព)៖ \${sScore}/72 (កម្រិតវាយតម្លៃ៖ \${sLvl})`;
 
       const systemPrompt = `អ្នកគឺជាប្រព័ន្ធបញ្ញាសិប្បនិម្មិត (AI) ផ្លូវការរបស់ក្រសួងអប់រំ យុវជន និងកីឡា នៃព្រះរាជាណាកម្ពុជា។
 ភារកិច្ចរបស់អ្នកគឺជួយលោកគ្រូអ្នកគ្រូក្នុងការសរសេរ «មតិវាយតម្លៃរួមរបស់គ្រូ និងដំបូន្មានសម្រាប់អាណាព្យាបាល»។
@@ -1980,7 +1974,7 @@
 
 ចំណាំ៖ មិនត្រូវសរសេរពាក្យអង់គ្លេស ឬសញ្ញាពិសេសច្រើនពេកទេ ត្រូវសម្រួលឱ្យស្របគ្នានឹងការបោះពុម្ពសន្លឹកបញ្ជាក់គុណវុឌ្ឍិផ្លូវការ។`;
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=\${apiKey}`;
 
       const payload = {
         contents: [{ parts: [{ text: promptText }] }],
@@ -2074,7 +2068,7 @@
         ];
         Object.keys(BEHAVIOR_CRITERIA).forEach(cat => {
           BEHAVIOR_CRITERIA[cat].items.forEach(item => {
-            const colName = `${BEHAVIOR_CRITERIA[cat].title.split(' ')[0]}_${item.id}_${item.text}`;
+            const colName = `\${BEHAVIOR_CRITERIA[cat].title.split(' ')[0]}_\${item.id}_\${item.text}`;
             behaviorPlaceholder[0][colName] = "✓";
             behaviorPlaceholder[1][colName] = "";
           });
@@ -2087,7 +2081,7 @@
           { "អត្តលេខសិស្ស": "ST-2026-002", "ឈ្មោះខ្មែរ": "ចាន់ ធីតា" }
         ];
         SKILL_ACTIVITIES.forEach((act, idx) => {
-          const colName = `សកម្មភាព_${idx + 1}_${act.text}`;
+          const colName = `សកម្មភាព_\${idx + 1}_\${act.text}`;
           templateSkillColumnMapping[act.id] = colName;
           skillPlaceholder[0][colName] = 3;
           skillPlaceholder[1][colName] = 0;
@@ -2133,7 +2127,7 @@
           const row = { "អត្តលេខសិស្ស": s.studentId, "ឈ្មោះខ្មែរ": s.nameKh };
           Object.keys(BEHAVIOR_CRITERIA).forEach(cat => {
             BEHAVIOR_CRITERIA[cat].items.forEach(item => {
-              const colName = `${BEHAVIOR_CRITERIA[cat].title.split(' ')[0]}_${item.id}_${item.text}`;
+              const colName = `\${BEHAVIOR_CRITERIA[cat].title.split(' ')[0]}_\${item.id}_\${item.text}`;
               row[colName] = s.behavior[cat]?.includes(item.id) ? "✓" : "";
             });
           });
@@ -2145,7 +2139,7 @@
         const skillData = students.map(s => {
           const row = { "អត្តលេខសិស្ស": s.studentId, "ឈ្មោះខ្មែរ": s.nameKh };
           SKILL_ACTIVITIES.forEach((act, idx) => {
-            const colName = `សកម្មភាព_${idx + 1}_${act.text}`;
+            const colName = `សកម្មភាព_\${idx + 1}_\${act.text}`;
             row[colName] = s.skills?.[act.id] ?? 0;
           });
           return row;
@@ -2209,14 +2203,14 @@
           }
 
           const updatedStudents = summaryRows.map((row, idx) => {
-            const studentId = row["អត្តលេខ"] || row["ID"] || row["អត្តលេខសិស្ស"] || `ST-${Date.now()}-${idx}`;
+            const studentId = row["អត្តលេខ"] || row["ID"] || row["អត្តលេខសិស្ស"] || `ST-\${Date.now()}-\${idx}`;
             const nameKh = row["ឈ្មោះជាភាសាខ្មែរ"] || row["Name"] || row["ឈ្មោះខ្មែរ"] || "សិស្សគ្មានឈ្មោះ";
             const nameEn = row["ឈ្មោះឡាតាំង"] || "";
             const gender = row["ភេទ"] || "ប្រុស"; 
             
             const gradeVal = row["ថ្នាក់ទី"] || row["Grade"] || "";
             const roomVal = row["បន្ទប់"] || row["Class"] || "";
-            const studentClass = (gradeVal && roomVal) ? `ថ្នាក់ទី ${gradeVal} ${roomVal}` : classConfig.className;
+            const studentClass = (gradeVal && roomVal) ? `ថ្នាក់ទី \${gradeVal} \${roomVal}` : classConfig.className;
 
             const aiComment = row["មតិវាយតម្លៃ_AI"] || "";
 
@@ -2262,7 +2256,7 @@
             }
 
             return {
-              id: `st_${Date.now()}_${idx}`,
+              id: `st_\${Date.now()}_\${idx}`,
               studentId,
               nameKh,
               nameEn,
@@ -2283,7 +2277,7 @@
           
           saveDataToLocalStorage();
           refreshUI();
-          triggerToast(`បានបញ្ចូលសិស្សចំនួន ${students.length} នាក់ ពី Excel/CSV ដោយជោគជ័យ!`);
+          triggerToast(`បានបញ្ចូលសិស្សចំនួន \${students.length} នាក់ ពី Excel/CSV ដោយជោគជ័យ!`);
         } catch (error) {
           console.error(error);
           triggerToast("ការអានឯកសារ Excel បរាជ័យ! សូមប្រាកដថាប្រើប្រាស់ទម្រង់ត្រឹមត្រូវ។", "error");
@@ -2297,7 +2291,7 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ students, classConfig }, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `MoEYS_Backup_${new Date().toLocaleDateString()}.json`);
+      downloadAnchor.setAttribute("download", `MoEYS_Backup_\${new Date().toLocaleDateString()}.json`);
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
@@ -2450,18 +2444,16 @@
 
         const aiCommentContent = s.aiComment 
           ? `<div class="whitespace-pre-wrap text-slate-800 text-xs leading-relaxed font-content">${s.aiComment}</div>`
-          : `<p class="text-slate-600 italic leading-relaxed font-content">ផ្អែកលើលទ្ធផល៖ សិស្ស ${s.nameKh} ទទួលបានពិន្ទុចរិយាសម្បទា "${bScore}/60" (${getBehaviorLevel(bScore).text}) និងបំណិនសម្បទា "${sScore}/72" (${getSkillLevel(sScore).text})។ សិស្សមានឥរិយាបថល្អ និងចូលរួមយ៉ាងសកម្មក្នុងការអភិវឌ្ឍខ្លួន។</p>`;
+          : `<p class="text-slate-600 italic leading-relaxed font-content">ផ្អែកលើលទ្ធផល៖ សិស្ស \${s.nameKh} ទទួលបានពិន្ទុចរិយាសម្បទា "\${bScore}/60" (\${getBehaviorLevel(bScore).text}) និងបំណិនសម្បទា "\${sScore}/72" (\${getSkillLevel(sScore).text})។ សិស្សមានឥរិយាបថល្អ និងចូលរួមយ៉ាងសកម្មក្នុងការអភិវឌ្ឍខ្លួន។</p>`;
 
         const isNotLast = idx < activeList.length - 1;
         const pageBreakClass = isNotLast ? 'bulk-print-page' : '';
 
+        // Removed School Logo image from printed pages as requested
         htmlContent += `
-          <div class="print-card bg-white p-8 ${pageBreakClass}" style="box-sizing: border-box; min-height: 277mm; display: flex; flex-direction: column; justify-content: space-between;">
+          <div class="print-card bg-white p-8 \${pageBreakClass}" style="box-sizing: border-box; min-height: 277mm; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div class="text-center space-y-0.5">
-                <div style="width: 56px; height: 56px;" class="mx-auto mb-2 flex items-center justify-center">
-                  <img src="https://lh3.googleusercontent.com/d/1L6k3hiIN-0sWPSNGDN3YJTsTYgzYS8Dn" alt="Logo" style="width:100%; height:100%; object-fit:contain;" onerror="this.onerror=null; this.src='https://placehold.co/150x150/0f766e/ffffff?text=MS';">
-                </div>
                 <h3 class="text-base text-slate-900 font-muol">ព្រះរាជាណាចក្រកម្ពុជា</h3>
                 <h4 class="text-sm text-slate-900 font-muol">ជាតិ សាសនា ព្រះមហាក្សត្រ</h4>
                 <div class="flex justify-center py-0.5">
@@ -2471,7 +2463,7 @@
                 </div>
                 <div class="pt-1 text-left text-xs space-y-0.5 font-content">
                   <p><strong>សាលារៀន៖</strong> ${classConfig.schoolName}</p>
-                  <p><strong>ថ្នាក់សិក្សា៖</strong> ${s.className || classConfig.className}</p>
+                  <p><strong>ថ្នាក់សិក្សា៖</strong> \${s.className || classConfig.className}</p>
                   <p><strong>ឆ្នាំសិក្សា៖</strong> ${classConfig.academicYear}</p>
                 </div>
               </div>
@@ -2483,34 +2475,34 @@
 
               <div class="grid grid-cols-2 gap-4 border border-slate-950 p-2.5 rounded text-xs font-content font-bold">
                 <div>
-                  <p class="mb-0.5"><strong class="inline-block w-24 font-content font-bold">អត្តលេខសិស្ស៖</strong> ${s.studentId}</p>
-                  <p class="mb-0.5"><strong class="inline-block w-24 font-content font-bold">ឈ្មោះសិស្ស (ខ្មែរ)៖</strong> <span class="font-bold text-slate-900">${s.nameKh}</span></p>
-                  ${nameEnRow}
+                  <p class="mb-0.5"><strong class="inline-block w-24 font-content font-bold">អត្តលេខសិស្ស៖</strong> \${s.studentId}</p>
+                  <p class="mb-0.5"><strong class="inline-block w-24 font-content font-bold">ឈ្មោះសិស្ស (ខ្មែរ)៖</strong> <span class="font-bold text-slate-900">\${s.nameKh}</span></p>
+                  \${nameEnRow}
                 </div>
                 <div>
-                  <p class="mb-0.5"><strong class="inline-block w-20 font-content font-bold">ភេទ៖</strong> ${s.gender}</p>
+                  <p class="mb-0.5"><strong class="inline-block w-20 font-content font-bold">ភេទ៖</strong> \${s.gender}</p>
                 </div>
               </div>
 
               <div class="mt-4 font-content">
                 <h3 class="text-xs border-b border-slate-950 pb-1 mb-2 font-muol text-slate-900">១. ការវាយតម្លៃចរិយាសម្បទា (៥ សកម្មភាព)</h3>
                 <div class="grid grid-cols-5 gap-2 font-bold font-content">
-                  ${behaviorBoxesHTML}
+                  \${behaviorBoxesHTML}
                 </div>
                 <div class="mt-2 bg-slate-50 p-1.5 border border-slate-200 rounded flex justify-between items-center text-xs font-bold">
-                  <p class="font-content font-bold">ពិន្ទុចរិយាសម្បទាសរុប៖ <strong class="font-mono">${bScore} / 60 ពិន្ទុ</strong></p>
-                  <p class="font-content font-bold">កម្រិតវាយតម្លៃ៖ <span class="text-teal-700">${bLevel}</span></p>
+                  <p class="font-content font-bold">ពិន្ទុចរិយាសម្បទាសរុប៖ <strong class="font-mono">\${bScore} / 60 ពិន្ទុ</strong></p>
+                  <p class="font-content font-bold">កម្រិតវាយតម្លៃ៖ <span class="text-teal-700">\${bLevel}</span></p>
                 </div>
               </div>
 
               <div class="mt-4 font-content">
                 <h3 class="text-xs border-b border-slate-950 pb-1 mb-2 font-muol text-slate-900">២. ការវាយតម្លៃបំណិនសម្បទា (កម្មវិធីសិក្សាក្រៅម៉ោង)</h3>
                 <div class="grid grid-cols-2 gap-x-6 gap-y-0.5 text-xs">
-                  ${skillItemsHTML}
+                  \${skillItemsHTML}
                 </div>
                 <div class="mt-2 bg-slate-50 p-1.5 border border-slate-200 rounded flex justify-between items-center text-xs font-bold">
-                  <p class="font-content font-bold">ពិន្ទុបំណិនសម្បទាសរុប៖ <strong class="font-mono">${sScore} / 72 ពិន្ទុ</strong></p>
-                  <p class="font-content font-bold">កម្រិតវាយតម្លៃ៖ <span class="text-amber-700">${sLevel}</span></p>
+                  <p class="font-content font-bold">ពិន្ទុបំណិនសម្បទាសរុប៖ <strong class="font-mono">\${sScore} / 72 ពិន្ទុ</strong></p>
+                  <p class="font-content font-bold">កម្រិតវាយតម្លៃ៖ <span class="text-amber-700">\${sLevel}</span></p>
                 </div>
               </div>
 
@@ -2519,7 +2511,7 @@
                   <h4 class="font-bold text-xs underline font-muol text-slate-900">សេចក្តីសន្និដ្ឋានរួមរបស់លោកគ្រូ/អ្នកគ្រូបង្រៀនថ្នាក់៖</h4>
                 </div>
                 <div class="min-h-12 leading-relaxed border-b border-dashed border-slate-400 pb-1">
-                  ${aiCommentContent}
+                  \${aiCommentContent}
                 </div>
               </div>
             </div>
