@@ -45,7 +45,7 @@
       scrollbar-width: none;  /* Firefox */
     }
 
-    /* ការកំណត់ស្ទីលពិសេសសម្រាប់ការបោះពុម្ព PDF */
+    /* การកំណត់ស្ទីលពិសេសសម្រាប់ការបោះពុម្ព PDF */
     @media print {
       @page {
         size: A4 portrait;
@@ -139,7 +139,6 @@
         <div class="w-20 h-20 mx-auto p-1.5 bg-white rounded-2xl shadow-lg border border-slate-100 flex items-center justify-center transform hover:scale-105 transition-all">
           <img src="https://lh3.googleusercontent.com/d/1L6k3hiIN-0sWPSNGDN3YJTsTYgzYS8Dn" alt="សាលាបឋមសិក្សា ម៉ឹង សំផន" class="w-16 h-16 object-contain rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/150x150/0f766e/ffffff?text=%E1%9E%98%E1%9F%8Grid';">
         </div>
-        <!-- ធ្វើការពង្រីកទំហំ Font ចំណងជើង និងឈ្មោះសាលាឱ្យធំច្បាស់ស្អាត -->
         <h2 class="text-xl md:text-2xl font-muol text-teal-900 leading-relaxed tracking-wide">ប្រព័ន្ធវាយតម្លៃពិន្ទុសិស្ស</h2>
         <p class="text-sm md:text-base text-slate-600 font-bold">បំណិនសម្បទា និង ចរិយាសម្បទា</p>
       </div>
@@ -181,7 +180,7 @@
   <!-- Container ចម្បងរបស់កម្មវិធី (លាក់រហូតដល់ Login ជោគជ័យ) -->
   <div id="app-container" class="hidden flex flex-col min-h-screen">
 
-    <!-- Section សម្រាប់បោះពុម្ពសិស្សម្តងទាំងអស់ជាក្រុម (លុប Class conflicting hidden/print:hidden ចេញ) -->
+    <!-- Section សម្រាប់បោះពុម្ពសិស្សម្តងទាំងអស់ជាក្រុម -->
     <div id="bulk-print-section"></div>
 
     <!-- Toast Message Overlay -->
@@ -304,8 +303,8 @@
           <div class="text-xs text-slate-700 space-y-2 flex-grow font-content">
             <h4 class="font-bold text-emerald-900 font-muol">💡 គន្លឹះវាយបញ្ចូលពិន្ទុជាចង្កោមតាមរយៈ Excel យ៉ាងរហ័ស៖</h4>
             <p class="leading-relaxed">
-              ១. លោកគ្រូអ្នកគ្រូអាចទាញយកគំរូដោយចុចប៊ូតុង <strong>«ទាញយកគំរូ Excel»</strong> ឬប្រើប៊ូតុង <strong>«ទាញចេញ Excel (.xlsx)»</strong> ដើម្បីទទួលបានតារាងឈ្មោះសិស្សស្រាប់។<br />
-              ២. បើកឯកសារ Excel នោះ រួចបំពេញព័ត៌មានសិស្ស គូសសញ្ញា ✓ ក្នុងតារាងចរិយាសម្បទា (សន្លឹកទី២) និងបំពេញពិន្ទុ ០-៤ ក្នុងតារាងបំណិន (សឹកទី៣)។<br />
+              ១. លោកគ្រូអ្នកគ្រូអាចទាញយកគំរូដោយចុចប៊ូតុង <strong>«ទាញយកគំរូ Excel»</strong> ឬប្រើប៊ូតុង <strong>«ទាញចេញ Excel (.xlsx)»</strong> ដើម្បីទទួលបានតារាងឈ្មោះសិស្សស្រាប់。<br />
+              ២. បើកឯកសារ Excel នោះ រួចបំពេញព័ត៌មានសិស្ស គូសសញ្ញា ✓ ក្នុងតារាងចរិយាសម្បទា (សន្លឹកទី២) និងបំពេញពិន្ទុ ០-៤ ក្នុងតារាងបំណិន (សឹកទី៣)。<br />
               ៣. រក្សាទុក រួចចុចប៊ូតុង <strong>«បញ្ចូលពី Excel (.xlsx)»</strong> ដើម្បីធ្វើបច្ចុប្បន្នភាពចូលក្នុងកម្មវិធីក្នុងពេលតែ ១វិនាទី!
             </p>
           </div>
@@ -377,7 +376,7 @@
                   </div>
                   <div>
                     <label class="block font-semibold text-slate-600 mb-1">កម្រិត / ក្រុម</label>
-                    <select id="config-division" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-750 cursor-pointer font-bold text-teal-755" onchange="updateClassLabel()">
+                    <select id="config-division" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-755 cursor-pointer font-bold text-teal-755" onchange="updateClassLabel()">
                       <option value="ក">ថ្នាក់ ក</option>
                       <option value="ខ">ថ្នាក់ ខ</option>
                       <option value="គ">ថ្នាក់ គ</option>
@@ -470,7 +469,7 @@
                   </tr>
                 </thead>
                 <tbody id="students-table-body" class="bg-white divide-y divide-slate-100 font-content animate-none">
-                  <!-- សិស្សលេចចេញនៅទីនេះស្វ័យប្រវត្តិ -->
+                  <!-- សិស្សលេចចេញនៅទីនេះស្វ័យប្រវត្ត -->
                 </tbody>
               </table>
             </div>
@@ -1383,7 +1382,7 @@
         className: classConfig.className,
         aiComment: "",
         behavior: { cleanliness: [], politeness: [], orderliness: [], punctuality: [], mindfulness: [] },
-        skills: SKILL_ACTIVITIES.reduce((acc, act) => ({ ...acc, [act.id]: 0 }), {})
+        skills: SKILL_ACTIVITIES.reduce((acc, act) => ({ ...acc, [acc.id]: 0 }), {})
       };
 
       students.push(created);
@@ -1951,7 +1950,6 @@
       });
       const lackingStr = lackingList.slice(0, 4).join(', ') || "គ្មានចំណុចខ្វះចន្លោះធំដុំទេ";
 
-      // ជួសជុលបញ្ហា escaped variables នៅក្នុង Prompt
       const promptText = `សូមបង្កើតសេចក្តីសន្និដ្ឋានរួមវាយតម្លៃ និងការណែនាំអប់រំសម្រាប់សិស្សម្នាក់៖
 - ឈ្មោះសិស្ស៖ ${currentStudent.nameKh} (ភេទ៖ ${currentStudent.gender})
 - ពិន្ទុចរិយាសម្បទា (៥ សកម្មភាព)៖ ${bScore}/60 (កម្រិតវាយតម្លៃ៖ ${bLvl})
@@ -1967,7 +1965,7 @@
 
 ចំណាំ៖ មិនត្រូវសរសេរពាក្យអង់គ្លេស ឬសញ្ញាពិសេសច្រើនពេកទេ ត្រូវសម្រួលឱ្យស្របគ្នានឹងការបោះពុម្ពសន្លឹកបញ្ជាក់គុណវុឌ្ឍិផ្លូវការ។`;
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
       const payload = {
         contents: [{ parts: [{ text: promptText }] }],
@@ -2089,6 +2087,7 @@
       }
     }
 
+    // នាំទិន្នន័យចេញទៅ Excel
     function exportToExcel() {
       if (!isXlsxLoaded || !window.XLSX) {
         triggerToast("ប្រព័ន្ធ Excel កំពុងផ្ទុក... សូមព្យាយាមម្តងទៀតក្នុងរយៈពេល ២វិនាទី!", "error");
@@ -2147,6 +2146,7 @@
       }
     }
 
+    // នាំចូលទិន្នន័យពី Excel
     function importFromExcel(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -2350,12 +2350,34 @@
       btn.classList.add('bg-slate-500');
       lucide.createIcons();
 
+      // ច្រោះយកតែសិស្សដែលស្ថិតក្នុងថ្នាក់ដែលបានជ្រើសរើស (បំបែកសិស្សតាមថ្នាក់ដែលបានចម្រោះ)
+      let studentsToSync = [];
+      let syncConfig = { ...classConfig };
+
+      if (selectedClassFilter === "បង្ហាញទាំងអស់") {
+        studentsToSync = students;
+      } else {
+        studentsToSync = students.filter(s => (s.className || classConfig.className) === selectedClassFilter);
+        syncConfig.className = selectedClassFilter; // កំណត់ឈ្មោះថ្នាក់ឱ្យទៅជាថ្នាក់ដែលបានច្រោះ
+      }
+
+      if (studentsToSync.length === 0) {
+        showToast("គ្មានទិន្នន័យសិស្សនៅក្នុងថ្នាក់ដែលបានចម្រោះនេះដើម្បីបញ្ជូនទេ!", "error");
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+        btn.classList.remove('bg-slate-500');
+        btn.classList.add('bg-blue-600', 'hover:bg-blue-500');
+        lucide.createIcons();
+        return;
+      }
+
       const payload = {
-        students: students,
-        classConfig: classConfig
+        students: studentsToSync,
+        classConfig: syncConfig
       };
 
       try {
+        // Utilizing mode 'no-cors' to guarantee data transmission is not blocked by CORS preflights
         await fetch(webAppUrl, {
           method: 'POST',
           mode: 'no-cors',
