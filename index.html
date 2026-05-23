@@ -2201,7 +2201,8 @@
             
             const gradeVal = row["ថ្នាក់ទី"] || row["Grade"] || "";
             const roomVal = row["បន្ទប់"] || row["Class"] || "";
-            const studentClass = (gradeVal && roomVal) ? `ថ្នាក់ទី ${gradeVal} ${roomVal}` : classConfig.className;
+            // កែសម្រួល៖ អាន کالم «ថ្នាក់» ពី Excel ដោយផ្ទាល់មុននឹងប្រើ Fallback
+            const studentClass = row["ថ្នាក់"] || row["Class"] || ((gradeVal && roomVal) ? `ថ្នាក់ទី ${gradeVal} ${roomVal}` : classConfig.className);
 
             const aiComment = row["មតិវាយតម្លៃ_AI"] || "";
 
@@ -2361,7 +2362,13 @@
         syncConfig.className = selectedClassFilter; // កំណត់ឈ្មោះថ្នាក់ឱ្យទៅជាថ្នាក់ដែលបានច្រោះ
       }
 
-      if (studentsToSync.length === 0) {
+      // ធានាថាសិស្សគ្រប់រូបដែលត្រូវសមកាលកម្មមានតម្លៃ className ច្បាស់លាស់មុននឹងផ្ញើទៅ Apps Script
+      const sanitizedStudents = studentsToSync.map(s => ({
+        ...s,
+        className: s.className || syncConfig.className
+      }));
+
+      if (sanitizedStudents.length === 0) {
         showToast("គ្មានទិន្នន័យសិស្សនៅក្នុងថ្នាក់ដែលបានចម្រោះនេះដើម្បីបញ្ជូនទេ!", "error");
         btn.innerHTML = originalHTML;
         btn.disabled = false;
@@ -2372,12 +2379,11 @@
       }
 
       const payload = {
-        students: studentsToSync,
+        students: sanitizedStudents,
         classConfig: syncConfig
       };
 
       try {
-        // Utilizing mode 'no-cors' to guarantee data transmission is not blocked by CORS preflights
         await fetch(webAppUrl, {
           method: 'POST',
           mode: 'no-cors',
